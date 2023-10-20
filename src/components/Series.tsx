@@ -1,14 +1,20 @@
 import {FlatList} from 'react-native';
 import React from 'react';
 import FocusableCard from './FocusableCard';
+import {IData} from './AnimatedSection';
 
-const Series = () => {
+const Series = ({item, index}: {item: IData; index: number}) => {
   return (
     <FlatList
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      data={[...new Array(10).fill(0)]}
-      renderItem={({index}) => <FocusableCard index={index} />}
+      data={item.data}
+      renderItem={({index: idx}) => (
+        <FocusableCard
+          style={{width: item.width, height: item.height}}
+          index={`${index} - ${idx}`}
+        />
+      )}
     />
   );
 };

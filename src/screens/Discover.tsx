@@ -1,13 +1,14 @@
 import React from 'react';
 import ScreenWrapper from '../components/ScreenWrapper';
-import Series from '../components/Series';
-import Movies from '../components/Movies';
+
+import TrailerContent from '../components/TrailerContent';
+import AnimatedSection from '../components/AnimatedSection';
 
 const Discover = () => {
   return (
     <ScreenWrapper>
-      <Series />
-      <Movies />
+      <TrailerContent />
+      <AnimatedSection />
     </ScreenWrapper>
   );
 };

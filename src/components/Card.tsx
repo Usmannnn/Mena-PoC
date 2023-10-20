@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useTouchable} from './Touchable';
 
-const Card = ({index}: {index: number}) => {
+const Card = ({index}: {index: string}) => {
   const {hasFocus} = useTouchable();
 
   return (
@@ -25,8 +25,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   container: {
-    width: 275,
-    height: 400,
+    flex: 1,
     margin: 10,
     borderRadius: 10,
     justifyContent: 'center',
