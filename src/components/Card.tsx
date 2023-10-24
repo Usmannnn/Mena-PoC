@@ -1,15 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {useTouchable} from './Touchable';
+import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
 const Card = ({index}: {index: string}) => {
   const {hasFocus} = useTouchable();
 
+  const animatedScale = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: withTiming(hasFocus ? 1.065 : 1, {duration: 300})}],
+    };
+  }, [hasFocus]);
+
   return (
-    <View
+    <Animated.View
       style={[
         styles.container,
+        // animatedScale,
         {
           backgroundColor: hasFocus ? 'blue' : 'black',
         },
@@ -17,7 +25,7 @@ const Card = ({index}: {index: string}) => {
       <Text style={{color: 'white', fontWeight: 'bold', fontSize: 24}}>
         {index}
       </Text>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -26,7 +34,6 @@ export default Card;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
