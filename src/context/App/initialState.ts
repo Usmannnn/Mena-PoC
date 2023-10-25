@@ -212,23 +212,5 @@ export const initialState: IState = {
         {focusKey: 'item9'},
       ],
     },
-    {
-      id: 8,
-      width: GetScaledValue(200),
-      height: GetScaledValue(350),
-      title: 'section8',
-      items: [
-        {focusKey: 'item0'},
-        {focusKey: 'item1'},
-        {focusKey: 'item2'},
-        {focusKey: 'item3'},
-        {focusKey: 'item4'},
-        {focusKey: 'item5'},
-        {focusKey: 'item6'},
-        {focusKey: 'item7'},
-        {focusKey: 'item8'},
-        {focusKey: 'item9'},
-      ],
-    },
   ],
 };

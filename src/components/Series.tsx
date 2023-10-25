@@ -1,34 +1,58 @@
-import {FlatList, View} from 'react-native';
-import React, {useCallback, useRef} from 'react';
+import {FlatList, StyleSheet, TVFocusGuideView, View} from 'react-native';
+import React, {RefObject, useCallback, useEffect, useRef} from 'react';
 import FocusableCard from './FocusableCard';
 import {IData} from '../context/App/initialState';
 import AnimatedBorder from './AnimatedBorder';
-import {useSharedValue} from 'react-native-reanimated';
+import {SharedValue, useSharedValue} from 'react-native-reanimated';
+import {GetScaledValue} from '../methods';
+import useScrollHandler from '../hooks/useScrollHandler';
 
-const Series = ({item, sectionIndex}: {item: IData; sectionIndex: number}) => {
-  const ITEM_WIDTH = item.width + 20;
-  // const ITEM_LENGTH = item.items.length;
+const Series = ({
+  item,
+  sectionIndex,
+  sectionRef,
+  currentSection,
+  contentY,
+}: {
+  item: IData;
+  sectionIndex: number;
+  sectionRef: RefObject<FlatList>;
+  currentSection: number;
+  contentY: SharedValue<number>;
+}) => {
   const ref = useRef<FlatList>(null);
-  const firstItemRef = useRef([]);
+  const {scrollToVertical} = useScrollHandler();
 
-  const position = useSharedValue({x: 5, y: 5});
+  const position = useSharedValue({
+    x: GetScaledValue(210),
+    y: GetScaledValue(10),
+  });
 
-  const collectRefs = (el: never, idx: number) => {
-    if (el && !firstItemRef.current.includes(el) && idx === 0) {
-      firstItemRef.current.push(el);
-    }
-  };
+  const ITEM_LENGTH = item.items.length;
+  const ITEM_WIDTH = item.width + GetScaledValue(20);
+
+  useEffect(() => {
+    scrollToVertical(sectionRef, currentSection, contentY);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sectionRef, currentSection]);
 
   const renderItem = useCallback(({index: idx}: {index: number}) => {
     return (
-      <FocusableCard
-        idx={idx}
-        position={position}
-        ref={(el: never) => collectRefs(el, idx)}
-        focusKey={`section${sectionIndex}_item${idx}`}
-        style={{width: item.width, height: item.height, margin: 10}}
-        index={`${sectionIndex} - ${idx}`}
-      />
+      <TVFocusGuideView trapFocusRight={idx === ITEM_LENGTH - 1}>
+        <FocusableCard
+          index={idx}
+          itemWidth={ITEM_WIDTH}
+          itemLength={ITEM_LENGTH}
+          animated={position}
+          listRef={ref}
+          focusKey={`section${sectionIndex}_item${idx}`}
+          style={{
+            width: item.width,
+            height: item.height,
+            margin: GetScaledValue(10),
+          }}
+        />
+      </TVFocusGuideView>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -36,17 +60,22 @@ const Series = ({item, sectionIndex}: {item: IData; sectionIndex: number}) => {
   return (
     <>
       <View style={{zIndex: 99}}>
-        {sectionIndex === 0 && (
+        {currentSection === sectionIndex && (
           <AnimatedBorder
             position={position}
-            style={{width: item.width + 5, height: item.height + 5}}
+            style={{
+              width: item.width,
+              height: item.height,
+            }}
           />
         )}
       </View>
+
       <FlatList
         ref={ref}
         horizontal={true}
-        style={{zIndex: 98}}
+        style={styles.container}
+        contentContainerStyle={styles.contentContainerStyle}
         scrollEnabled={false}
         keyExtractor={(_, index) => index.toString()}
         showsHorizontalScrollIndicator={false}
@@ -63,3 +92,13 @@ const Series = ({item, sectionIndex}: {item: IData; sectionIndex: number}) => {
 };
 
 export default Series;
+
+const styles = StyleSheet.create({
+  container: {
+    zIndex: 98,
+    paddingLeft: GetScaledValue(200),
+  },
+  contentContainerStyle: {
+    paddingRight: GetScaledValue(200),
+  },
+});

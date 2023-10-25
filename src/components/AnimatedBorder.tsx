@@ -8,6 +8,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import {GetScaledValue} from '../methods';
 
 const AnimatedBorder = ({
   style,
@@ -40,11 +41,10 @@ export default AnimatedBorder;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    borderRadius: 15,
+    borderRadius: GetScaledValue(20),
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 5,
+    borderWidth: GetScaledValue(5),
     borderColor: '#ffbc00',
-    zIndex: 99,
   },
 });

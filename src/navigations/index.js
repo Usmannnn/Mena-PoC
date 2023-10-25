@@ -8,10 +8,13 @@ const RootNavigationContainer = () => {
   const {appDispatch} = useApp();
 
   useTVEventHandler(({eventType}) => {
-    if (eventType === 'right' || eventType === 'left') {
-      console.log({eventType});
-
-      appDispatch(appActions.setDirection('eventType'));
+    if (
+      eventType === 'right' ||
+      eventType === 'left' ||
+      eventType === 'up' ||
+      eventType === 'down'
+    ) {
+      // appDispatch(appActions.setDirection('eventType'));
       appDispatch(appActions.setDirection(eventType));
     }
   });

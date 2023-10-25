@@ -10,10 +10,13 @@ import {useApp} from '../context';
 import {IData} from '../context/App/initialState';
 
 const AnimatedSection = () => {
-  const {data} = useApp();
+  const {data, focusKey} = useApp();
   const ref = useRef<FlatList>(null);
   const {height} = useWindowDimensions();
   const contentY = useSharedValue(height / 2);
+  const currentSection = data.findIndex((i: IData) =>
+    focusKey.startsWith(i.title),
+  );
 
   const animatedContainer = useAnimatedStyle(() => {
     return {
@@ -23,9 +26,18 @@ const AnimatedSection = () => {
 
   const renderItem = useCallback(
     ({item, index}: {item: IData; index: number}) => {
-      return <Series item={item} sectionIndex={index} />;
+      return (
+        <Series
+          item={item}
+          sectionIndex={index}
+          sectionRef={ref}
+          currentSection={currentSection}
+          contentY={contentY}
+        />
+      );
     },
-    [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [ref, currentSection],
   );
 
   return (
@@ -33,6 +45,7 @@ const AnimatedSection = () => {
       <FlatList
         ref={ref}
         data={data}
+        scrollEnabled={false}
         keyExtractor={(_, index) => index.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
