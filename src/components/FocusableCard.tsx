@@ -1,4 +1,4 @@
-import React, {RefObject, useCallback} from 'react';
+import React, {RefObject, useCallback, useEffect, useLayoutEffect} from 'react';
 import {Touchable} from './Touchable';
 import {
   NavigationProp,
@@ -6,10 +6,22 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import Card from './Card';
-import {FlatList, StyleProp, ViewStyle} from 'react-native';
+import {
+  Animated,
+  FlatList,
+  StyleProp,
+  ViewStyle,
+  useWindowDimensions,
+} from 'react-native';
 import useScrollHandler from '../hooks/useScrollHandler';
-import {SharedValue} from 'react-native-reanimated';
+import {
+  SharedValue,
+  measure,
+  runOnUI,
+  useAnimatedRef,
+} from 'react-native-reanimated';
 import {appActions, useApp} from '../context';
+import {GetScaledValue} from '../methods';
 
 interface Props {
   index: number;
@@ -30,24 +42,46 @@ const FocusableCard = ({
   focusKey,
   animated,
 }: Props) => {
+  const animatedRef = useAnimatedRef();
+
   const {appDispatch} = useApp();
+  const {width, height} = useWindowDimensions();
   const {scrollToHorizontal} = useScrollHandler();
   const {navigate} = useNavigation<NavigationProp<ParamListBase>>();
 
   const onFocusHandler = useCallback(() => {
-    scrollToHorizontal(listRef, index, itemWidth, itemLength, animated);
     appDispatch(appActions.setFocus(focusKey));
+    scrollToHorizontal(listRef, index, itemWidth, itemLength, animated);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, listRef]);
 
+  // useEffect(() => {
+  //   runOnUI(() => {
+  //     const measurement = measure(animatedRef);
+
+  //     if (measurement === null) {
+  //       return null;
+  //     }
+
+  //     console.log(measurement);
+
+  //     animated.value = {
+  //       x: measurement.pageX + 10,
+  //       y: animated.value.y,
+  //     };
+  //   })();
+  // }, [index, animatedRef]);
+
   return (
+    // <Animated.View ref={animatedRef}>
     <Touchable
       onPress={() => navigate('Detail', {index})}
       style={style}
       onFocus={onFocusHandler}>
       <Card index={focusKey} />
     </Touchable>
+    // </Animated.View>
   );
 };
 

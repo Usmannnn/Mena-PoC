@@ -17,13 +17,16 @@ const useScrollHandler = () => {
   ) => {
     const viewableItemCount = width / itemWidth;
     const integer = Math.floor(viewableItemCount);
-    const decimal = viewableItemCount - integer;
+    var decimal = viewableItemCount - integer;
+    // const decimal = 0.9;
     const breakpoint = itemLength - integer;
 
     let offsetX = animated.value.x;
 
     if (currentIndex === breakpoint) {
+      // offsetX = GetScaledValue(210);
       offsetX = itemWidth * decimal + GetScaledValue(10);
+      console.log('first', itemWidth, decimal, offsetX);
     } else if (currentIndex > breakpoint && currentIndex <= itemLength - 1) {
       offsetX =
         prevIndex > currentIndex
@@ -59,25 +62,34 @@ const useScrollHandler = () => {
 
   const scrollToVertical = (
     sectionRef: RefObject<FlatList>,
+    ref: RefObject<FlatList>,
     currentSection: number,
     contentY: SharedValue<number>,
+    position: SharedValue<{x: number; y: number}>,
   ) => {
+    // ref.current?.scrollToIndex({
+    //   index: 0,
+    //   animated: true,
+    //   viewPosition: 0,
+    // });
+
     sectionRef.current?.scrollToIndex({
       index: currentSection,
       animated: true,
       viewPosition: 0,
     });
 
-    if (prevSectionIndex < currentSection && currentSection === 4) {
-      console.log('first');
+    position.value = {
+      x: GetScaledValue(210),
+      y: position.value.y,
+    };
 
+    if (prevSectionIndex < currentSection && currentSection === 4) {
       contentY.value = height;
       prevSectionIndex = currentSection;
 
       return;
     } else {
-      console.log('else');
-
       contentY.value = height / 2;
       prevSectionIndex = currentSection;
 
@@ -89,72 +101,3 @@ const useScrollHandler = () => {
 };
 
 export default useScrollHandler;
-
-// const scrollToHorizontal = (
-//   listRef: RefObject<FlatList>,
-//   animated: SharedValue<{x: number; y: number}>,
-//   currentIndex: number,
-//   focusKey: string,
-//   // firstItemRef: any,
-// ) => {
-//   const length = data[currentIndex].items.length;
-//   const itemWidth = data[currentIndex].items.itemWidth;
-
-//   const viewableItemCount = width / itemWidth;
-//   const integer = Math.floor(viewableItemCount);
-//   const decimal = viewableItemCount - integer;
-//   const breakpoint = length - integer;
-
-//   appDispatch(appActions.setFocus(focusKey));
-//   console.log({direction});
-
-//   switch (direction) {
-//     case AbstractKeys.RIGHT:
-//       listRef.current?.scrollToIndex({
-//         index: currentIndex + 1,
-//         animated: true,
-//         viewPosition: 0,
-//       });
-//       let rightPosition: number;
-//       if (currentIndex === breakpoint) {
-//         rightPosition = animated.value.x + itemWidth * decimal;
-//       } else if (currentIndex > breakpoint) {
-//         rightPosition = animated.value.x + itemWidth;
-//       } else {
-//         rightPosition = animated.value.x;
-//       }
-//       animated.value = {
-//         x: rightPosition,
-//         y: animated.value.y,
-//       };
-//       break;
-//     case AbstractKeys.LEFT:
-//       listRef.current?.scrollToIndex({
-//         index: currentIndex - 1,
-//         animated: true,
-//         viewPosition: 0,
-//       });
-//       let leftPosition =
-//         currentIndex >= breakpoint ? animated.value.x - itemWidth : 10;
-//       animated.value = {
-//         x: leftPosition,
-//         y: animated.value.y,
-//       };
-//       break;
-//     case AbstractKeys.UP:
-//     case AbstractKeys.DOWN:
-//       // setFocus(firstItemRef.current[0]);
-//       listRef.current?.scrollToIndex({
-//         index: 0,
-//         animated: true,
-//         viewPosition: 0,
-//       });
-//       animated.value = {
-//         x: 10,
-//         y: animated.value.y,
-//       };
-//       break;
-//     default:
-//       break;
-//   }
-// };

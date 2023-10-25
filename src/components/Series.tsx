@@ -21,20 +21,21 @@ const Series = ({
   contentY: SharedValue<number>;
 }) => {
   const ref = useRef<FlatList>(null);
-  const {scrollToVertical} = useScrollHandler();
 
   const position = useSharedValue({
-    x: GetScaledValue(210),
+    x: GetScaledValue(200),
     y: GetScaledValue(10),
   });
+
+  const {scrollToVertical} = useScrollHandler();
 
   const ITEM_LENGTH = item.items.length;
   const ITEM_WIDTH = item.width + GetScaledValue(20);
 
   useEffect(() => {
-    scrollToVertical(sectionRef, currentSection, contentY);
+    scrollToVertical(sectionRef, ref, currentSection, contentY, position);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sectionRef, currentSection]);
+  }, [sectionRef, currentSection, ref]);
 
   const renderItem = useCallback(({index: idx}: {index: number}) => {
     return (
@@ -43,8 +44,8 @@ const Series = ({
           index={idx}
           itemWidth={ITEM_WIDTH}
           itemLength={ITEM_LENGTH}
-          animated={position}
           listRef={ref}
+          animated={position}
           focusKey={`section${sectionIndex}_item${idx}`}
           style={{
             width: item.width,
