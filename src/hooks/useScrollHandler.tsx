@@ -1,12 +1,13 @@
-import {RefObject} from 'react';
-import {FlatList, useWindowDimensions} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import {SharedValue} from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
+import {useApp} from '../context';
 
 var prevIndex = 0;
 var prevSectionIndex = 0;
 
 const useScrollHandler = () => {
+  const {data} = useApp();
   const {width, height} = useWindowDimensions();
 
   const calculateOffsetX = (
@@ -14,25 +15,35 @@ const useScrollHandler = () => {
     itemWidth: number,
     itemLength: number,
     animated: SharedValue<{x: number; y: number}>,
+    scrollX: SharedValue<number>,
   ) => {
     const viewableItemCount = width / itemWidth;
     const integer = Math.floor(viewableItemCount);
     var decimal = viewableItemCount - integer;
-    // const decimal = 0.9;
     const breakpoint = itemLength - integer;
 
     let offsetX = animated.value.x;
 
+    const isRight = prevIndex < currentIndex;
+    const isLeft = prevIndex > currentIndex;
+
     if (currentIndex === breakpoint) {
-      // offsetX = GetScaledValue(210);
       offsetX = itemWidth * decimal + GetScaledValue(10);
-      console.log('first', itemWidth, decimal, offsetX);
+      scrollX.value =
+        scrollX.value - itemWidth + itemWidth * decimal - GetScaledValue(200);
     } else if (currentIndex > breakpoint && currentIndex <= itemLength - 1) {
-      offsetX =
-        prevIndex > currentIndex
-          ? animated.value.x - itemWidth
-          : animated.value.x + itemWidth;
+      //check direction
+      if (isRight) {
+        offsetX = animated.value.x + itemWidth;
+      } else if (isLeft) {
+        offsetX = animated.value.x - itemWidth;
+      }
     } else {
+      if (isRight) {
+        scrollX.value = itemWidth * currentIndex * -1;
+      } else if (isLeft) {
+        scrollX.value += itemWidth;
+      }
       offsetX = GetScaledValue(210);
     }
 
@@ -40,20 +51,20 @@ const useScrollHandler = () => {
   };
 
   const scrollToHorizontal = (
-    listRef: RefObject<FlatList>,
     currentIndex: number,
     itemWidth: number,
     itemLength: number,
     animated: SharedValue<{x: number; y: number}>,
+    scrollX: SharedValue<number>,
   ) => {
-    listRef.current?.scrollToIndex({
-      index: currentIndex,
-      animated: true,
-      viewPosition: 0,
-    });
-
     animated.value = {
-      x: calculateOffsetX(currentIndex, itemWidth, itemLength, animated),
+      x: calculateOffsetX(
+        currentIndex,
+        itemWidth,
+        itemLength,
+        animated,
+        scrollX,
+      ),
       y: animated.value.y,
     };
 
@@ -61,40 +72,32 @@ const useScrollHandler = () => {
   };
 
   const scrollToVertical = (
-    sectionRef: RefObject<FlatList>,
-    ref: RefObject<FlatList>,
     currentSection: number,
     contentY: SharedValue<number>,
     position: SharedValue<{x: number; y: number}>,
+    scrollX: SharedValue<number>,
+    scrollY: SharedValue<number>,
   ) => {
-    // ref.current?.scrollToIndex({
-    //   index: 0,
-    //   animated: true,
-    //   viewPosition: 0,
-    // });
-
-    sectionRef.current?.scrollToIndex({
-      index: currentSection,
-      animated: true,
-      viewPosition: 0,
-    });
-
     position.value = {
       x: GetScaledValue(210),
       y: position.value.y,
     };
 
-    if (prevSectionIndex < currentSection && currentSection === 4) {
+    if (currentSection === 4) {
       contentY.value = height;
-      prevSectionIndex = currentSection;
-
-      return;
     } else {
       contentY.value = height / 2;
-      prevSectionIndex = currentSection;
-
-      return;
     }
+
+    //down
+    if (prevSectionIndex < currentSection) {
+      scrollY.value -= data[currentSection - 1].height;
+    } else if (prevSectionIndex > currentSection) {
+      scrollY.value += data[currentSection].height;
+    }
+
+    scrollX.value = 0;
+    prevSectionIndex = currentSection;
   };
 
   return {scrollToVertical, scrollToHorizontal};

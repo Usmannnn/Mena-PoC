@@ -1,52 +1,42 @@
-import {FlatList, StyleSheet, TVFocusGuideView, View} from 'react-native';
-import React, {RefObject, useCallback, useEffect, useRef} from 'react';
+import {ScrollView, StyleSheet, TVFocusGuideView, View} from 'react-native';
+import React, {useCallback} from 'react';
 import FocusableCard from './FocusableCard';
 import {IData} from '../context/App/initialState';
 import AnimatedBorder from './AnimatedBorder';
-import {SharedValue, useSharedValue} from 'react-native-reanimated';
+import Animated, {
+  SharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
-import useScrollHandler from '../hooks/useScrollHandler';
 
 const Series = ({
   item,
   sectionIndex,
-  sectionRef,
   currentSection,
-  contentY,
+  position,
+  scrollX,
 }: {
   item: IData;
   sectionIndex: number;
-  sectionRef: RefObject<FlatList>;
   currentSection: number;
   contentY: SharedValue<number>;
+  position: SharedValue<{x: number; y: number}>;
+  scrollX: SharedValue<number>;
 }) => {
-  const ref = useRef<FlatList>(null);
-
-  const position = useSharedValue({
-    x: GetScaledValue(200),
-    y: GetScaledValue(10),
-  });
-
-  const {scrollToVertical} = useScrollHandler();
-
   const ITEM_LENGTH = item.items.length;
   const ITEM_WIDTH = item.width + GetScaledValue(20);
 
-  useEffect(() => {
-    scrollToVertical(sectionRef, ref, currentSection, contentY, position);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sectionRef, currentSection, ref]);
-
-  const renderItem = useCallback(({index: idx}: {index: number}) => {
+  const renderItem = useCallback((idx: number) => {
     return (
-      <TVFocusGuideView trapFocusRight={idx === ITEM_LENGTH - 1}>
+      <TVFocusGuideView trapFocusRight={idx === ITEM_LENGTH - 1} key={idx}>
         <FocusableCard
           index={idx}
           itemWidth={ITEM_WIDTH}
           itemLength={ITEM_LENGTH}
-          listRef={ref}
           animated={position}
           focusKey={`section${sectionIndex}_item${idx}`}
+          scrollX={scrollX}
           style={{
             width: item.width,
             height: item.height,
@@ -57,6 +47,12 @@ const Series = ({
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateX: withTiming(scrollX.value, {duration: 400})}],
+    };
+  });
 
   return (
     <>
@@ -72,22 +68,15 @@ const Series = ({
         )}
       </View>
 
-      <FlatList
-        ref={ref}
-        horizontal={true}
-        style={styles.container}
-        contentContainerStyle={styles.contentContainerStyle}
-        scrollEnabled={false}
-        keyExtractor={(_, index) => index.toString()}
-        showsHorizontalScrollIndicator={false}
-        data={item.items}
-        renderItem={renderItem}
-        getItemLayout={(data, index) => ({
-          length: ITEM_WIDTH,
-          offset: ITEM_WIDTH * index,
-          index,
-        })}
-      />
+      <ScrollView scrollEnabled={false} horizontal>
+        <Animated.View
+          style={[
+            currentSection === sectionIndex && animatedStyle,
+            styles.container,
+          ]}>
+          {item.items.map((_, index) => renderItem(index))}
+        </Animated.View>
+      </ScrollView>
     </>
   );
 };
@@ -98,6 +87,8 @@ const styles = StyleSheet.create({
   container: {
     zIndex: 98,
     paddingLeft: GetScaledValue(200),
+
+    flexDirection: 'row',
   },
   contentContainerStyle: {
     paddingRight: GetScaledValue(200),
