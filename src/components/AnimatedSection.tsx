@@ -14,10 +14,10 @@ import useScrollHandler from '../hooks/useScrollHandler';
 
 const AnimatedSection = () => {
   const {data, focusKey} = useApp();
+
   const {height} = useWindowDimensions();
   const contentY = useSharedValue(height / 2);
 
-  const scrollX = useSharedValue(0);
   const scrollY = useSharedValue(0);
 
   const position = useSharedValue({
@@ -44,7 +44,7 @@ const AnimatedSection = () => {
   });
 
   useEffect(() => {
-    scrollToVertical(currentSection, contentY, position, scrollX, scrollY);
+    scrollToVertical(currentSection, contentY, position, scrollY);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
@@ -56,10 +56,10 @@ const AnimatedSection = () => {
             <Animated.View style={animatedItem} key={index}>
               <Series
                 item={item}
-                sectionIndex={index}
-                currentSection={currentSection}
                 contentY={contentY}
                 position={position}
+                sectionIndex={index}
+                currentSection={currentSection}
               />
             </Animated.View>
           );

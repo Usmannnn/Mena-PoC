@@ -18,7 +18,7 @@ interface Props {
   focusKey: string;
   style: StyleProp<ViewStyle>;
   animated: SharedValue<{x: number; y: number}>;
-  listRef: RefObject<FlatList>;
+  horizontalRef: RefObject<FlatList>;
 }
 
 const FocusableCard = ({
@@ -28,7 +28,7 @@ const FocusableCard = ({
   style,
   focusKey,
   animated,
-  listRef,
+  horizontalRef,
 }: Props) => {
   const {appDispatch} = useApp();
   const {scrollToHorizontal} = useScrollHandler();
@@ -37,10 +37,10 @@ const FocusableCard = ({
   const onFocusHandler = useCallback(() => {
     appDispatch(appActions.setFocus(focusKey));
 
-    scrollToHorizontal(index, itemWidth, itemLength, animated, listRef);
+    scrollToHorizontal(index, itemWidth, itemLength, animated, horizontalRef);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, itemWidth, focusKey]);
+  }, [focusKey, index, itemWidth, horizontalRef]);
 
   return (
     <Touchable

@@ -1,10 +1,13 @@
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
-import React, {useCallback, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import FocusableCard from './FocusableCard';
 import {IData} from '../context/App/initialState';
 import AnimatedBorder from './AnimatedBorder';
 import {SharedValue} from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
+import useCustomFocus from '../hooks/useCustomFocus';
+
+const refs: any[] = [];
 
 const Series = ({
   item,
@@ -19,28 +22,43 @@ const Series = ({
   position: SharedValue<{x: number; y: number}>;
 }) => {
   const ref = useRef<FlatList>(null);
+  const {setFocus} = useCustomFocus();
   const ITEM_LENGTH = item.items.length;
   const ITEM_WIDTH = item.width + GetScaledValue(20);
 
   const renderItem = useCallback(({index: idx}: {index: number}) => {
     return (
-      <FocusableCard
-        key={idx}
-        index={idx}
-        itemWidth={ITEM_WIDTH}
-        itemLength={ITEM_LENGTH}
-        listRef={ref}
-        animated={position}
-        focusKey={`section${sectionIndex}_item${idx}`}
-        style={{
-          width: item.width,
-          height: item.height,
-          margin: GetScaledValue(10),
-        }}
-      />
+      <View key={idx} ref={el => idx === 0 && refs.push(el)}>
+        <FocusableCard
+          index={idx}
+          itemWidth={ITEM_WIDTH}
+          itemLength={ITEM_LENGTH}
+          horizontalRef={ref}
+          animated={position}
+          focusKey={`section${sectionIndex}_item${idx}`}
+          style={{
+            width: item.width,
+            height: item.height,
+            margin: GetScaledValue(10),
+          }}
+        />
+      </View>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    ref.current?.scrollToIndex({
+      index: 0,
+      animated: true,
+      viewPosition: 0,
+    });
+
+    setFocus(refs[currentSection]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSection]);
+
+  // refs.current.map(i => console.log(i?._children[0]?._nativeTag));
 
   return (
     <>
@@ -60,6 +78,7 @@ const Series = ({
         ref={ref}
         horizontal
         data={item.items}
+        scrollEnabled={false}
         style={styles.container}
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}

@@ -70,7 +70,6 @@ const useScrollHandler = () => {
     currentSection: number,
     contentY: SharedValue<number>,
     position: SharedValue<{x: number; y: number}>,
-    scrollX: SharedValue<number>,
     scrollY: SharedValue<number>,
   ) => {
     position.value = {
@@ -91,7 +90,6 @@ const useScrollHandler = () => {
       scrollY.value += data[currentSection].height;
     }
 
-    scrollX.value = 0;
     prevSectionIndex = currentSection;
   };
 
