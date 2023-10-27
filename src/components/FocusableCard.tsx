@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {RefObject, useCallback} from 'react';
 import {Touchable} from './Touchable';
 import {
   NavigationProp,
@@ -6,7 +6,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import Card from './Card';
-import {StyleProp, ViewStyle} from 'react-native';
+import {FlatList, StyleProp, ViewStyle} from 'react-native';
 import useScrollHandler from '../hooks/useScrollHandler';
 import {SharedValue} from 'react-native-reanimated';
 import {appActions, useApp} from '../context';
@@ -18,7 +18,7 @@ interface Props {
   focusKey: string;
   style: StyleProp<ViewStyle>;
   animated: SharedValue<{x: number; y: number}>;
-  scrollX: SharedValue<number>;
+  listRef: RefObject<FlatList>;
 }
 
 const FocusableCard = ({
@@ -28,7 +28,7 @@ const FocusableCard = ({
   style,
   focusKey,
   animated,
-  scrollX,
+  listRef,
 }: Props) => {
   const {appDispatch} = useApp();
   const {scrollToHorizontal} = useScrollHandler();
@@ -37,7 +37,7 @@ const FocusableCard = ({
   const onFocusHandler = useCallback(() => {
     appDispatch(appActions.setFocus(focusKey));
 
-    scrollToHorizontal(index, itemWidth, itemLength, animated, scrollX);
+    scrollToHorizontal(index, itemWidth, itemLength, animated, listRef);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, itemWidth, focusKey]);

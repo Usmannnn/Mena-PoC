@@ -60,7 +60,6 @@ const AnimatedSection = () => {
                 currentSection={currentSection}
                 contentY={contentY}
                 position={position}
-                scrollX={scrollX}
               />
             </Animated.View>
           );
