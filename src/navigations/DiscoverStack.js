@@ -8,6 +8,7 @@ const Stack = createNativeStackNavigator();
 const DiscoverStack = () => {
   return (
     <Stack.Navigator
+      initialRouteName="Discover"
       screenOptions={{
         headerShown: false,
       }}>

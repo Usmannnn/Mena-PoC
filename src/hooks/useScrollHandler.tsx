@@ -15,9 +15,9 @@ const useScrollHandler = () => {
     currentIndex: number,
     itemWidth: number,
     itemLength: number,
-    animated: SharedValue<{x: number; y: number}>,
+    position: SharedValue<number>,
   ) => {
-    let offsetX = animated.value.x;
+    let offsetX = position.value;
 
     const viewableItemCount = (width - GetScaledValue(220)) / itemWidth;
     const integer = Math.floor(viewableItemCount);
@@ -49,7 +49,7 @@ const useScrollHandler = () => {
     currentIndex: number,
     itemWidth: number,
     itemLength: number,
-    animated: SharedValue<{x: number; y: number}>,
+    position: SharedValue<number>,
     listRef: RefObject<FlatList>,
   ) => {
     listRef.current?.scrollToIndex({
@@ -58,10 +58,12 @@ const useScrollHandler = () => {
       viewPosition: 0,
     });
 
-    animated.value = {
-      x: calculateOffsetX(currentIndex, itemWidth, itemLength, animated),
-      y: animated.value.y,
-    };
+    position.value = calculateOffsetX(
+      currentIndex,
+      itemWidth,
+      itemLength,
+      position,
+    );
 
     prevIndex = currentIndex;
   };
@@ -69,14 +71,8 @@ const useScrollHandler = () => {
   const scrollToVertical = (
     currentSection: number,
     contentY: SharedValue<number>,
-    position: SharedValue<{x: number; y: number}>,
     scrollY: SharedValue<number>,
   ) => {
-    position.value = {
-      x: GetScaledValue(210),
-      y: position.value.y,
-    };
-
     if (currentSection === 4) {
       contentY.value = height;
     } else {

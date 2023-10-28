@@ -15,14 +15,11 @@ const AnimatedBorder = ({
   position,
 }: {
   style: StyleProp<ViewStyle>;
-  position: SharedValue<{x: number; y: number}>;
+  position: SharedValue<number>;
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        {translateX: withTiming(position.value.x, {duration: 400})},
-        {translateY: withTiming(position.value.y, {duration: 400})},
-      ],
+      transform: [{translateX: withTiming(position.value, {duration: 400})}],
     };
   });
 
@@ -41,6 +38,7 @@ export default AnimatedBorder;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
+    top: GetScaledValue(10),
     borderRadius: GetScaledValue(20),
     justifyContent: 'center',
     alignItems: 'center',

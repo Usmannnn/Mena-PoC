@@ -17,7 +17,7 @@ interface Props {
   itemLength: number;
   focusKey: string;
   style: StyleProp<ViewStyle>;
-  animated: SharedValue<{x: number; y: number}>;
+  position: SharedValue<number>;
   horizontalRef: RefObject<FlatList>;
 }
 
@@ -27,7 +27,7 @@ const FocusableCard = ({
   itemLength,
   style,
   focusKey,
-  animated,
+  position,
   horizontalRef,
 }: Props) => {
   const {appDispatch} = useApp();
@@ -37,16 +37,16 @@ const FocusableCard = ({
   const onFocusHandler = useCallback(() => {
     appDispatch(appActions.setFocus(focusKey));
 
-    scrollToHorizontal(index, itemWidth, itemLength, animated, horizontalRef);
+    scrollToHorizontal(index, itemWidth, itemLength, position, horizontalRef);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focusKey, index, itemWidth, horizontalRef]);
+  }, [index, itemWidth, horizontalRef]);
 
   return (
     <Touchable
-      onPress={() => navigate('Detail', {index})}
       style={style}
-      onFocus={onFocusHandler}>
+      onFocus={onFocusHandler}
+      onPress={() => navigate('Detail', {index})}>
       <Card index={focusKey} />
     </Touchable>
   );

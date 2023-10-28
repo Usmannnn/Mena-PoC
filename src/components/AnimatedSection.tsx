@@ -2,7 +2,6 @@ import {ScrollView, StyleSheet, useWindowDimensions} from 'react-native';
 import React, {useEffect} from 'react';
 import Series from './Series';
 import Animated, {
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -16,14 +15,12 @@ const AnimatedSection = () => {
   const {data, focusKey} = useApp();
 
   const {height} = useWindowDimensions();
-  const contentY = useSharedValue(height / 2);
+  const {scrollToVertical} = useScrollHandler();
 
   const scrollY = useSharedValue(0);
-
-  const position = useSharedValue({
-    x: GetScaledValue(210),
-    y: GetScaledValue(10),
-  });
+  const contentY = useSharedValue(height / 2);
+  // const position = useSharedValue(GetScaledValue(210));
+  const position = useSharedValue(GetScaledValue(10));
 
   const currentSection = data.findIndex((i: IData) =>
     focusKey.startsWith(i.title),
@@ -34,17 +31,15 @@ const AnimatedSection = () => {
       height: withTiming(contentY.value, {duration: 400}),
     };
   });
-  const {scrollToVertical} = useScrollHandler();
-
-  const animatedItem = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: withTiming(scrollY.value, {duration: 400})}],
-      opacity: interpolate(scrollY.value, [0, 200], [1, 0]),
-    };
-  });
 
   useEffect(() => {
-    scrollToVertical(currentSection, contentY, position, scrollY);
+    console.log({currentSection});
+
+    if (currentSection !== -1) {
+      scrollToVertical(currentSection, contentY, scrollY);
+    } else {
+      position.value = GetScaledValue(10);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
@@ -53,15 +48,15 @@ const AnimatedSection = () => {
       <ScrollView scrollEnabled={false}>
         {data.map((item: IData, index: number) => {
           return (
-            <Animated.View style={animatedItem} key={index}>
-              <Series
-                item={item}
-                contentY={contentY}
-                position={position}
-                sectionIndex={index}
-                currentSection={currentSection}
-              />
-            </Animated.View>
+            <Series
+              key={index}
+              item={item}
+              contentY={contentY}
+              position={position}
+              sectionIndex={index}
+              currentSection={currentSection}
+              scrollY={scrollY}
+            />
           );
         })}
       </ScrollView>

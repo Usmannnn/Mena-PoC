@@ -3,7 +3,11 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import FocusableCard from './FocusableCard';
 import {IData} from '../context/App/initialState';
 import AnimatedBorder from './AnimatedBorder';
-import {SharedValue} from 'react-native-reanimated';
+import Animated, {
+  SharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
 import useCustomFocus from '../hooks/useCustomFocus';
 
@@ -14,12 +18,14 @@ const Series = ({
   sectionIndex,
   currentSection,
   position,
+  scrollY,
 }: {
   item: IData;
   sectionIndex: number;
   currentSection: number;
   contentY: SharedValue<number>;
-  position: SharedValue<{x: number; y: number}>;
+  position: SharedValue<number>;
+  scrollY: SharedValue<number>;
 }) => {
   const ref = useRef<FlatList>(null);
   const {setFocus} = useCustomFocus();
@@ -34,7 +40,7 @@ const Series = ({
           itemWidth={ITEM_WIDTH}
           itemLength={ITEM_LENGTH}
           horizontalRef={ref}
-          animated={position}
+          position={position}
           focusKey={`section${sectionIndex}_item${idx}`}
           style={{
             width: item.width,
@@ -58,11 +64,24 @@ const Series = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
-  // refs.current.map(i => console.log(i?._children[0]?._nativeTag));
+  const animatedItem = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: withTiming(scrollY.value, {duration: 400})}],
+    };
+  });
+
+  // const animatedOpacity = useAnimatedStyle(() => {
+  //   return {
+  //     opacity: withTiming(
+  //       interpolate(scrollY.value, [0, -item.width], [1, 0]),
+  //       {duration: 400},
+  //     ),
+  //   };
+  // }, [ITEM_WIDTH]);
 
   return (
-    <>
-      <View style={{zIndex: 99}}>
+    <Animated.View style={[animatedItem]}>
+      <View style={styles.container}>
         {currentSection === sectionIndex && (
           <AnimatedBorder
             position={position}
@@ -88,7 +107,7 @@ const Series = ({
           />
         }
       />
-    </>
+    </Animated.View>
   );
 };
 
@@ -96,17 +115,17 @@ export default Series;
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 98,
-    paddingLeft: GetScaledValue(200),
-
-    flexDirection: 'row',
+    zIndex: 99,
+    // paddingLeft: GetScaledValue(200),
   },
-  contentContainerStyle: {
-    paddingRight: GetScaledValue(200),
+  listContainer: {
+    zIndex: 98,
+    flexDirection: 'row',
   },
   listFooterContainer: {
     width: GetScaledValue(200),
     marginRight: GetScaledValue(220),
+    // marginRight: GetScaledValue(20),
     backgroundColor: 'purple',
     marginLeft: GetScaledValue(10),
     borderRadius: GetScaledValue(10),
