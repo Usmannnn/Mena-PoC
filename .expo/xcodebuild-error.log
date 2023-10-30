@@ -1,93 +1,93 @@
 --- xcodebuild: WARNING: Using the first of multiple matching destinations:
 { platform:tvOS Simulator, id:33075C88-C6D2-48D2-A0EC-656465E88448, OS:17.0, name:Apple TV }
 { platform:tvOS Simulator, id:33075C88-C6D2-48D2-A0EC-656465E88448, OS:17.0, name:Apple TV }
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.947 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.446 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
-2023-10-30 11:05:56.451 xcodebuild[17947:307542] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
+2023-10-30 13:16:32.948 xcodebuild[23554:363323] [MT] DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/IDEFrameworks/IDEFrameworks-22267/IDEFoundation/Provisioning/Capabilities Infrastructure/IDECapabilityQuerySelection.swift:103
 Details:  createItemModels creation requirements should not create capability item model for a capability item model that already exists.
 Function: createItemModels(for:itemModelSource:)
-Thread:   <_NSMainThread: 0x600000eb82c0>{number = 1, name = main}
+Thread:   <_NSMainThread: 0x600002a3c2c0>{number = 1, name = main}
 Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.

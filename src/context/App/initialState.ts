@@ -108,11 +108,10 @@ export const initialState: IState = {
         {
           focusKey: 'item0',
           uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-          poster: require('../../../assets/image.jpg'),
+          poster: require('../../../assets/HeroBg.png'),
         },
         {
           focusKey: 'item1',
-
           uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
           poster: {
             uri: 'https://postercim.net/wp-content/uploads/2019/01/braveheart-film-posteri-600x750.jpg',
@@ -120,7 +119,6 @@ export const initialState: IState = {
         },
         {
           focusKey: 'item2',
-
           uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
           poster: {
             uri: 'https://postercim.net/wp-content/uploads/2019/01/braveheart-film-posteri-600x750.jpg',

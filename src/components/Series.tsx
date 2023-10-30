@@ -10,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
 import useCustomFocus from '../hooks/useCustomFocus';
+import {appActions, useApp} from '../context';
 
 const refs: any[] = [];
 
@@ -28,28 +29,21 @@ const Series = ({
   scrollY: SharedValue<number>;
 }) => {
   const ref = useRef<FlatList>(null);
+  const {appDispatch} = useApp();
   const {setFocus} = useCustomFocus();
   const ITEM_LENGTH = item.items.length;
   const ITEM_WIDTH = item.width + GetScaledValue(20);
+  const animatedItem = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: withTiming(scrollY.value, {duration: 400})}],
+    };
+  });
 
-  const renderItem = useCallback(({index: idx}: {index: number}) => {
-    return (
-      <View key={idx} ref={el => idx === 0 && refs.push(el)}>
-        <FocusableCard
-          index={idx}
-          itemWidth={ITEM_WIDTH}
-          itemLength={ITEM_LENGTH}
-          horizontalRef={ref}
-          position={position}
-          focusKey={`section${sectionIndex}_item${idx}`}
-          style={{
-            width: item.width,
-            height: item.height,
-            margin: GetScaledValue(10),
-          }}
-        />
-      </View>
-    );
+  useEffect(() => {
+    // navigation yada aksiyon sonrası next focuslar için refler contexte tutulmalı
+    // setDirection geçici isimlerndirme
+    appDispatch(appActions.setDirection(refs[1]));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -60,24 +54,32 @@ const Series = ({
       viewPosition: 0,
     });
 
-    setFocus(refs[currentSection]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // setFocus(refs[currentSection]);
   }, [currentSection]);
 
-  const animatedItem = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: withTiming(scrollY.value, {duration: 400})}],
-    };
-  });
-
-  // const animatedOpacity = useAnimatedStyle(() => {
-  //   return {
-  //     opacity: withTiming(
-  //       interpolate(scrollY.value, [0, -item.width], [1, 0]),
-  //       {duration: 400},
-  //     ),
-  //   };
-  // }, [ITEM_WIDTH]);
+  const renderItem = useCallback(
+    ({index: idx}: {index: number}) => {
+      return (
+        <View key={idx} ref={el => idx === 0 && refs.push(el)}>
+          <FocusableCard
+            index={idx}
+            itemWidth={ITEM_WIDTH}
+            itemLength={ITEM_LENGTH}
+            horizontalRef={ref}
+            position={position}
+            focusKey={`section${sectionIndex}_item${idx}`}
+            style={{
+              width: item.width,
+              height: item.height,
+              margin: GetScaledValue(10),
+            }}
+          />
+        </View>
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sectionIndex],
+  );
 
   return (
     <Animated.View style={[animatedItem]}>
@@ -98,6 +100,7 @@ const Series = ({
         horizontal
         data={item.items}
         scrollEnabled={false}
+        showsHorizontalScrollIndicator={false}
         style={styles.container}
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
@@ -116,7 +119,7 @@ export default Series;
 const styles = StyleSheet.create({
   container: {
     zIndex: 99,
-    // paddingLeft: GetScaledValue(200),
+    paddingLeft: GetScaledValue(200),
   },
   listContainer: {
     zIndex: 98,
@@ -124,8 +127,8 @@ const styles = StyleSheet.create({
   },
   listFooterContainer: {
     width: GetScaledValue(200),
-    // marginRight: GetScaledValue(220),
-    marginRight: GetScaledValue(20),
+    marginRight: GetScaledValue(220),
+    // marginRight: GetScaledValue(20),
     backgroundColor: 'purple',
     marginLeft: GetScaledValue(10),
     borderRadius: GetScaledValue(10),

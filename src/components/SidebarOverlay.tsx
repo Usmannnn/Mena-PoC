@@ -47,8 +47,7 @@ const styles = StyleSheet.create({
     width: GetScaledValue(210),
     aspectRatio: 0.1,
     position: 'absolute',
-    zIndex: 997,
-    right: GetScaledValue(400),
-    top: GetScaledValue(100),
+    right: GetScaledValue(300),
+    top: GetScaledValue(50),
   },
 });

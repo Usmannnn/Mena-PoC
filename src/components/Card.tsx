@@ -2,25 +2,18 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {useTouchable} from './Touchable';
-import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
 
 const Card = ({index}: {index: string}) => {
   const {hasFocus} = useTouchable();
 
-  const animatedScale = useAnimatedStyle(() => {
-    return {
-      transform: [{scale: withTiming(hasFocus ? 1.065 : 1, {duration: 300})}],
-    };
-  }, [hasFocus]);
-
   return (
     <Animated.View
       style={[
         styles.container,
-        // animatedScale,
         {
-          backgroundColor: hasFocus ? 'blue' : 'black',
+          backgroundColor: hasFocus ? 'blue' : 'red',
         },
       ]}>
       <Text
