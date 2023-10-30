@@ -1,4 +1,10 @@
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 import React, {useCallback, useEffect, useRef} from 'react';
 import FocusableCard from './FocusableCard';
 import {IData} from '../context/App/initialState';
@@ -6,6 +12,7 @@ import AnimatedBorder from './AnimatedBorder';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
@@ -18,21 +25,27 @@ const Series = ({
   item,
   sectionIndex,
   currentSection,
-  position,
   scrollY,
 }: {
   item: IData;
   sectionIndex: number;
   currentSection: number;
   contentY: SharedValue<number>;
-  position: SharedValue<number>;
   scrollY: SharedValue<number>;
 }) => {
   const ref = useRef<FlatList>(null);
   const {appDispatch} = useApp();
   const {setFocus} = useCustomFocus();
+  const {width} = useWindowDimensions();
   const ITEM_LENGTH = item.items.length;
   const ITEM_WIDTH = item.width + GetScaledValue(20);
+
+  const position = useSharedValue({
+    x: GetScaledValue(210),
+    width: item.width,
+    height: item.height,
+  });
+
   const animatedItem = useAnimatedStyle(() => {
     return {
       transform: [{translateY: withTiming(scrollY.value, {duration: 400})}],
@@ -54,7 +67,12 @@ const Series = ({
       viewPosition: 0,
     });
 
-    // setFocus(refs[currentSection]);
+    position.value = {
+      ...position.value,
+      x: GetScaledValue(210),
+    };
+    setFocus(refs[currentSection]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
   const renderItem = useCallback(
@@ -106,6 +124,21 @@ const Series = ({
         renderItem={renderItem}
         ListFooterComponent={
           <TouchableOpacity
+            onFocus={() =>
+              (position.value = {
+                ...position.value,
+                x: width - GetScaledValue(220),
+                width: GetScaledValue(200),
+              })
+            }
+            onBlur={() => {
+              // up ve down action'da sorun yaratır
+              position.value = {
+                ...position.value,
+                x: position.value.x - ITEM_WIDTH,
+                width: item.width,
+              };
+            }}
             style={[styles.listFooterContainer, {height: item.height}]}
           />
         }

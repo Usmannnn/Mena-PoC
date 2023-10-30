@@ -8,21 +8,16 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useApp} from '../context';
 import {IData} from '../context/App/initialState';
-import {GetScaledValue} from '../methods';
 import useScrollHandler from '../hooks/useScrollHandler';
 
 const AnimatedSection = () => {
   const {data, focusKey} = useApp();
-
-  console.log(focusKey);
 
   const {height} = useWindowDimensions();
   const {scrollToVertical} = useScrollHandler();
 
   const scrollY = useSharedValue(0);
   const contentY = useSharedValue(height / 2);
-  const position = useSharedValue(GetScaledValue(210));
-  // const position = useSharedValue(GetScaledValue(10));
 
   const currentSection = data.findIndex((i: IData) =>
     focusKey.startsWith(i.title),
@@ -50,7 +45,6 @@ const AnimatedSection = () => {
               key={index}
               item={item}
               contentY={contentY}
-              position={position}
               sectionIndex={index}
               currentSection={currentSection}
               scrollY={scrollY}

@@ -17,7 +17,7 @@ interface Props {
   itemLength: number;
   focusKey: string;
   style: StyleProp<ViewStyle>;
-  position: SharedValue<number>;
+  position: SharedValue<{x: number; width: number; height: number}>;
   horizontalRef: RefObject<FlatList>;
 }
 
