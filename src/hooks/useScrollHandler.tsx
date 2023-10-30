@@ -19,7 +19,7 @@ const useScrollHandler = () => {
   ) => {
     let offsetX = position.value;
 
-    const viewableItemCount = (width - GetScaledValue(220)) / itemWidth;
+    const viewableItemCount = width / itemWidth;
     const integer = Math.floor(viewableItemCount);
     const breakpoint = itemLength - integer;
 
@@ -28,7 +28,8 @@ const useScrollHandler = () => {
 
     if (isRight) {
       if (currentIndex - 1 === breakpoint) {
-        offsetX = width - GetScaledValue(220) - itemWidth * (integer - 1);
+        // offsetX = width - GetScaledValue(220) - itemWidth * (integer - 1); whensidebar is absolute
+        offsetX = width - GetScaledValue(420) - itemWidth * (integer - 1);
       } else if (currentIndex > breakpoint) {
         offsetX += itemWidth;
       }
@@ -38,7 +39,8 @@ const useScrollHandler = () => {
       if (currentIndex > breakpoint) {
         offsetX -= itemWidth;
       } else if (currentIndex === breakpoint) {
-        offsetX = GetScaledValue(210);
+        // offsetX = GetScaledValue(210);
+        offsetX = GetScaledValue(10);
       }
     }
 

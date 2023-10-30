@@ -2,10 +2,14 @@ import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {GetScaledValue} from '../methods';
 import FocusableItem from './FocusableItem';
+import SidebarOverlay from './SidebarOverlay';
+import {useApp} from '../context';
 
 const refs: any[] = [];
 
 const Sidebar = () => {
+  const {focusKey} = useApp();
+
   return (
     <View style={styles.container}>
       <Image
@@ -24,6 +28,7 @@ const Sidebar = () => {
           </View>
         )),
       ]}
+      <SidebarOverlay hasFocus={focusKey.startsWith('sidebar')} />
     </View>
   );
 };

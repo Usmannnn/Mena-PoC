@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
   },
   listFooterContainer: {
     width: GetScaledValue(200),
-    marginRight: GetScaledValue(220),
-    // marginRight: GetScaledValue(20),
+    // marginRight: GetScaledValue(220),
+    marginRight: GetScaledValue(20),
     backgroundColor: 'purple',
     marginLeft: GetScaledValue(10),
     borderRadius: GetScaledValue(10),
