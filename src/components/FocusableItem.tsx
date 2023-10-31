@@ -15,7 +15,7 @@ const FocusableItem = ({
   style: ViewStyle;
 }) => {
   const {setFocus} = useCustomFocus();
-  const {appDispatch, direction} = useApp();
+  const {appDispatch, refs} = useApp();
 
   const onFocusHandler = useCallback(() => {
     appDispatch(appActions.setFocus(focusKey));
@@ -23,10 +23,11 @@ const FocusableItem = ({
   }, [focusKey, index]);
 
   const onPressHandler = useCallback(() => {
-    setFocus(direction);
-    appDispatch(appActions.setFocus('section1_item0'));
+    // console.log(refs[0]);
+    // setFocus(refs[0]);
+    // appDispatch(appActions.setFocus('section1_item0'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focusKey, direction]);
+  }, [focusKey, refs]);
 
   return (
     <Touchable style={style} onFocus={onFocusHandler} onPress={onPressHandler}>

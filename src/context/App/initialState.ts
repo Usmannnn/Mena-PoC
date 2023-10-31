@@ -29,8 +29,8 @@ export const initialState: IState = {
   data: [
     {
       id: 0,
-      width: GetScaledValue(500), // 180,
-      height: GetScaledValue(200), //100 ,
+      width: GetScaledValue(400), // 180,
+      height: GetScaledValue(146), //100 ,
       title: 'section0',
       items: [
         {focusKey: 'item0'},
@@ -47,8 +47,8 @@ export const initialState: IState = {
     },
     {
       id: 1,
-      width: GetScaledValue(400),
-      height: GetScaledValue(400),
+      width: GetScaledValue(380),
+      height: GetScaledValue(220),
       title: 'section1',
       items: [
         {focusKey: 'item0'},
@@ -66,8 +66,8 @@ export const initialState: IState = {
 
     {
       id: 2,
-      width: GetScaledValue(200),
-      height: GetScaledValue(350),
+      width: GetScaledValue(240),
+      height: GetScaledValue(360),
       title: 'section2',
       items: [
         {focusKey: 'item0'},
@@ -85,8 +85,8 @@ export const initialState: IState = {
 
     {
       id: 3,
-      width: GetScaledValue(250),
-      height: GetScaledValue(250),
+      width: GetScaledValue(170),
+      height: GetScaledValue(340),
       title: 'section3',
       items: [
         {focusKey: 'item0'},
@@ -103,8 +103,8 @@ export const initialState: IState = {
     },
     {
       id: 4,
-      width: GetScaledValue(400),
-      height: GetScaledValue(850),
+      width: GetScaledValue(380),
+      height: GetScaledValue(760),
       title: 'section4',
       items: [
         {
@@ -160,8 +160,8 @@ export const initialState: IState = {
     },
     {
       id: 5,
-      width: GetScaledValue(180),
-      height: GetScaledValue(110),
+      width: GetScaledValue(240),
+      height: GetScaledValue(240),
       title: 'section5',
       items: [
         {focusKey: 'item0'},

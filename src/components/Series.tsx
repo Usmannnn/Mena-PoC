@@ -2,7 +2,6 @@ import {
   FlatList,
   Platform,
   StyleSheet,
-  TouchableOpacity,
   View,
   useWindowDimensions,
 } from 'react-native';
