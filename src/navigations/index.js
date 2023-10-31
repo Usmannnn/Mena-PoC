@@ -18,10 +18,8 @@ const RootNavigationContainer = () => {
 
   return (
     <NavigationContainer>
-      <TVFocusGuideView style={{flex: 1, flexDirection: 'row'}} autoFocus>
-        <Sidebar />
-        <DiscoverStack />
-      </TVFocusGuideView>
+      <Sidebar />
+      <DiscoverStack />
     </NavigationContainer>
   );
 };

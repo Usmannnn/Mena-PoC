@@ -15,12 +15,11 @@ const useScrollHandler = () => {
     currentIndex: number,
     itemWidth: number,
     itemLength: number,
-    position: SharedValue<{x: number; width: number; height: number}>,
+    position: SharedValue<{x: number; width: number}>,
   ) => {
     let offsetX = position.value.x;
 
     const viewableItemCount = (width - GetScaledValue(220)) / itemWidth;
-    // const viewableItemCount = width / itemWidth;
     const integer = Math.floor(viewableItemCount);
     const breakpoint = itemLength - integer;
 
@@ -29,9 +28,7 @@ const useScrollHandler = () => {
 
     if (isRight) {
       if (currentIndex - 1 === breakpoint) {
-        // whensidebar is absolute
         offsetX = width - GetScaledValue(220) - itemWidth * (integer - 1);
-        // offsetX = width - GetScaledValue(420) - itemWidth * (integer - 1);
       } else if (currentIndex > breakpoint) {
         offsetX += itemWidth;
       }
@@ -42,7 +39,6 @@ const useScrollHandler = () => {
         offsetX -= itemWidth;
       } else if (currentIndex === breakpoint) {
         offsetX = GetScaledValue(210);
-        // offsetX = GetScaledValue(10);
       }
     }
     return offsetX;
@@ -52,7 +48,7 @@ const useScrollHandler = () => {
     currentIndex: number,
     itemWidth: number,
     itemLength: number,
-    position: SharedValue<{x: number; width: number; height: number}>,
+    position: SharedValue<{x: number; width: number}>,
     listRef: RefObject<FlatList>,
   ) => {
     listRef.current?.scrollToIndex({

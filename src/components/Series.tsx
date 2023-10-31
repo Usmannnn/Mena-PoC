@@ -43,8 +43,9 @@ const Series = ({
   const position = useSharedValue({
     x: GetScaledValue(210),
     width: item.width,
-    height: item.height,
   });
+
+  const sectionWidth = useSharedValue(item.width);
 
   const animatedItem = useAnimatedStyle(() => {
     return {
@@ -82,7 +83,9 @@ const Series = ({
           <FocusableCard
             index={idx}
             itemWidth={ITEM_WIDTH}
+            itemHeight={item.height}
             itemLength={ITEM_LENGTH}
+            sectionWidth={sectionWidth}
             horizontalRef={ref}
             position={position}
             focusKey={`section${sectionIndex}_item${idx}`}
@@ -161,7 +164,6 @@ const styles = StyleSheet.create({
   listFooterContainer: {
     width: GetScaledValue(200),
     marginRight: GetScaledValue(220),
-    // marginRight: GetScaledValue(20),
     backgroundColor: 'purple',
     marginLeft: GetScaledValue(10),
     borderRadius: GetScaledValue(10),

@@ -10,6 +10,11 @@ const actions = {
     type: TYPES.SET_FOCUS,
     payload,
   }),
+
+  setRefs: payload => ({
+    type: TYPES.SET_REFS,
+    payload,
+  }),
 };
 
 export default actions;

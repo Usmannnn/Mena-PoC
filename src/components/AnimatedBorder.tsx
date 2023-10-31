@@ -15,13 +15,12 @@ const AnimatedBorder = ({
   position,
 }: {
   style: StyleProp<ViewStyle>;
-  position: SharedValue<{x: number; width: number; height: number}>;
+  position: SharedValue<{x: number; width: number}>;
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{translateX: withTiming(position.value.x, {duration: 400})}],
       width: withTiming(position.value.width, {duration: 400}),
-      height: withTiming(position.value.height, {duration: 400}),
     };
   });
 

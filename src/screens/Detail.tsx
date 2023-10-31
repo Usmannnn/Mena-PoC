@@ -4,13 +4,14 @@ import GoBack from '../components/GoBack';
 import OtherFocusable from '../components/OtherFocusable';
 import {View} from 'react-native';
 import {useApp} from '../context';
+import {GetScaledValue} from '../methods';
 
 const Detail = () => {
   const {focusKey} = useApp();
 
   return (
     <ScreenWrapper>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', paddingLeft: GetScaledValue(200)}}>
         <GoBack />
         <OtherFocusable param={focusKey} />
       </View>

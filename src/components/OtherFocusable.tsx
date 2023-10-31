@@ -1,6 +1,7 @@
 import {Text, View} from 'react-native';
 import React from 'react';
 import {Touchable, useTouchable} from './Touchable';
+import {GetScaledValue} from '../methods';
 
 const OtherFocusable = ({param}: {param: number}) => {
   return (
@@ -18,15 +19,20 @@ const Item = ({param}: {param: number}) => {
   return (
     <View
       style={{
-        width: 400,
-        height: 200,
+        width: GetScaledValue(400),
+        height: GetScaledValue(200),
         borderRadius: 25,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: hasFocus ? 'blue' : 'black',
-        margin: 10,
+        margin: GetScaledValue(10),
       }}>
-      <Text style={{color: 'white', fontWeight: 'bold', fontSize: 24}}>
+      <Text
+        style={{
+          color: 'white',
+          fontWeight: 'bold',
+          fontSize: GetScaledValue(24),
+        }}>
         Other Focusable - {param}
       </Text>
     </View>

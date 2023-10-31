@@ -1,6 +1,7 @@
 const TYPES = {
   SET_DIRECTION: 'SET_DIRECTION',
   SET_FOCUS: 'SET_FOCUS',
+  SET_REFS: 'SET_REFS',
 };
 
 export default TYPES;

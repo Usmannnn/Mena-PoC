@@ -18,11 +18,13 @@ export interface IData {
 export interface IState {
   direction: string;
   focusKey: string;
+  refs: any[];
   data: IData[];
 }
 
 export const initialState: IState = {
   direction: '',
+  refs: [],
   focusKey: 'section0_item0',
   data: [
     {

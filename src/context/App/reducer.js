@@ -14,6 +14,12 @@ const reducer = (state, action) => {
         direction: action.payload,
       };
 
+    case TYPES.SET_REFS:
+      return {
+        ...state,
+        refs: action.payload,
+      };
+
     default:
       throw new Error();
   }
