@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import DiscoverStack from './DiscoverStack';
-import {TVFocusGuideView} from 'react-native';
+import {View} from 'react-native';
 import Sidebar from '../components/Sidebar';
 
 const RootNavigationContainer = () => {
@@ -18,8 +18,10 @@ const RootNavigationContainer = () => {
 
   return (
     <NavigationContainer>
-      <Sidebar />
-      <DiscoverStack />
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        <Sidebar />
+        <DiscoverStack />
+      </View>
     </NavigationContainer>
   );
 };

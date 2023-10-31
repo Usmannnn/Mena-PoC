@@ -1,4 +1,4 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Platform, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {GetScaledValue} from '../methods';
 import FocusableItem from './FocusableItem';
@@ -7,6 +7,7 @@ import {useApp} from '../context';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
 const refs: any[] = [];
+const isAndroid = Platform.OS === 'android';
 
 const Sidebar = () => {
   const {focusKey} = useApp();
@@ -21,7 +22,7 @@ const Sidebar = () => {
   );
 
   return (
-    <Animated.View style={[styles.container, animatedOpacity]}>
+    <Animated.View style={[styles.container, isAndroid && animatedOpacity]}>
       <View style={styles.innerContainer}>
         <View style={{flex: 2}}>
           <Image
@@ -53,7 +54,7 @@ export default Sidebar;
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: isAndroid ? 'absolute' : 'relative',
     top: 0,
     left: 0,
     bottom: 0,

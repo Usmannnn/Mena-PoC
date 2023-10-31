@@ -1,4 +1,4 @@
-import {FlatList, useWindowDimensions} from 'react-native';
+import {FlatList, Platform, useWindowDimensions} from 'react-native';
 import {SharedValue} from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
 import {useApp} from '../context';
@@ -6,6 +6,8 @@ import {RefObject} from 'react';
 
 var prevIndex = 0;
 var prevSectionIndex = 0;
+
+const isAndroid = Platform.OS === 'android';
 
 const useScrollHandler = () => {
   const {data} = useApp();
@@ -19,7 +21,9 @@ const useScrollHandler = () => {
   ) => {
     let offsetX = position.value.x;
 
-    const viewableItemCount = (width - GetScaledValue(220)) / itemWidth;
+    const viewableItemCount = isAndroid
+      ? (width - GetScaledValue(220)) / itemWidth
+      : width / itemWidth;
     const integer = Math.floor(viewableItemCount);
     const breakpoint = itemLength - integer;
 
@@ -28,7 +32,9 @@ const useScrollHandler = () => {
 
     if (isRight) {
       if (currentIndex - 1 === breakpoint) {
-        offsetX = width - GetScaledValue(220) - itemWidth * (integer - 1);
+        offsetX = isAndroid
+          ? width - GetScaledValue(220) - itemWidth * (integer - 1)
+          : width - GetScaledValue(410) - itemWidth * (integer - 1);
       } else if (currentIndex > breakpoint) {
         offsetX += itemWidth;
       }
@@ -38,7 +44,7 @@ const useScrollHandler = () => {
       if (currentIndex > breakpoint) {
         offsetX -= itemWidth;
       } else if (currentIndex === breakpoint) {
-        offsetX = GetScaledValue(210);
+        offsetX = isAndroid ? GetScaledValue(210) : GetScaledValue(10);
       }
     }
     return offsetX;

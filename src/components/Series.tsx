@@ -1,5 +1,6 @@
 import {
   FlatList,
+  Platform,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -16,10 +17,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {GetScaledValue} from '../methods';
-import useCustomFocus from '../hooks/useCustomFocus';
-import {appActions, useApp} from '../context';
+import {Touchable} from './Touchable';
 
 const refs: any[] = [];
+const isAndroid = Platform.OS === 'android';
 
 const Series = ({
   item,
@@ -34,14 +35,12 @@ const Series = ({
   scrollY: SharedValue<number>;
 }) => {
   const ref = useRef<FlatList>(null);
-  const {appDispatch} = useApp();
-  const {setFocus} = useCustomFocus();
   const {width} = useWindowDimensions();
   const ITEM_LENGTH = item.items.length;
   const ITEM_WIDTH = item.width + GetScaledValue(20);
 
   const position = useSharedValue({
-    x: GetScaledValue(210),
+    x: isAndroid ? GetScaledValue(210) : GetScaledValue(10),
     width: item.width,
   });
 
@@ -54,14 +53,6 @@ const Series = ({
   });
 
   useEffect(() => {
-    // navigation yada aksiyon sonrası next focuslar için refler contexte tutulmalı
-    // setDirection geçici isimlerndirme
-    appDispatch(appActions.setDirection(refs[1]));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     ref.current?.scrollToIndex({
       index: 0,
       animated: true,
@@ -70,9 +61,9 @@ const Series = ({
 
     position.value = {
       ...position.value,
-      x: GetScaledValue(210),
+      x: isAndroid ? GetScaledValue(210) : GetScaledValue(10),
     };
-    setFocus(refs[currentSection]);
+    // setFocus(refs[currentSection]); ????
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
@@ -126,11 +117,14 @@ const Series = ({
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
         ListFooterComponent={
-          <TouchableOpacity
+          <Touchable
+            onPress={() => alert('Load More')}
             onFocus={() =>
               (position.value = {
                 ...position.value,
-                x: width - GetScaledValue(220),
+                x: isAndroid
+                  ? width - GetScaledValue(220)
+                  : width - GetScaledValue(410),
                 width: GetScaledValue(200),
               })
             }
@@ -155,7 +149,7 @@ export default Series;
 const styles = StyleSheet.create({
   container: {
     zIndex: 99,
-    paddingLeft: GetScaledValue(200),
+    paddingLeft: isAndroid ? GetScaledValue(200) : 0,
   },
   listContainer: {
     zIndex: 98,
@@ -163,7 +157,7 @@ const styles = StyleSheet.create({
   },
   listFooterContainer: {
     width: GetScaledValue(200),
-    marginRight: GetScaledValue(220),
+    marginRight: isAndroid ? GetScaledValue(220) : GetScaledValue(10),
     backgroundColor: 'purple',
     marginLeft: GetScaledValue(10),
     borderRadius: GetScaledValue(10),
