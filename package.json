@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "expo run:ios",
-    "tvos": "expo run:ios --scheme Mena-tvOS --device \"AppleTV_2-4K\"",
+    "tvos": "expo run:ios --scheme Mena-tvOS",
     "start": "react-native start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest"
